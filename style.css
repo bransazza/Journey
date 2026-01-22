@@ -1,0 +1,882 @@
+/* --- TEMA: VINTAGE SCRAPBOOK (RESPONSIVE & NO CROP) --- */
+:root {
+    --bg-texture: #f0e6d2; 
+    --paper-white: #fdfbf7;
+    --paper-line: #e3d0b9;
+    --ink-color: #2c3e50;
+    --tape-color: rgba(255, 255, 255, 0.4);
+    
+    /* FONT SETUP */
+    --font-title: 'Lobster Two', cursive; 
+    --font-body: 'Quicksand', sans-serif; 
+    --font-hand: 'Patrick Hand', cursive; 
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    /* BACKGROUND DARK BLUE (Tema Stardust - Sama seperti Login) */
+    background-color: #2c3e50; 
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+    
+    font-family: var(--font-body);
+    color: var(--ink-color); /* Teks tetap gelap karena berada di atas kertas putih */
+    font-size: 1rem;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+.hidden { display: none !important; }
+
+/* --- LOGIN PAGE --- */
+/* --- LOGIN PAGE (BIG & VINTAGE STYLE) --- */
+.login-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    /* Background Gelap dengan Texture Noise/Bintik biar estetik */
+    background: #2c3e50;
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+    display: flex; justify-content: center; align-items: center; z-index: 1000;
+    padding: 20px;
+}
+
+.login-paper {
+    /* UBAH INI: Warna dasar ganti dari putih ke Cream */
+    background-color: #fdf6e3; 
+    
+    /* UBAH INI: Gradient garis disesuaikan dengan warna cream */
+    /* Garisnya saya buat warna biru pudar (#abc) biar kaya buku tulis lama */
+    background-image: repeating-linear-gradient(#fdf6e3 0px, #fdf6e3 39px, #94a3b8 40px);
+    
+    width: 100%; 
+    max-width: 550px;
+    padding: 60px 40px; 
+    
+    text-align: center;
+    position: relative;
+    border-radius: 5px;
+    transform: rotate(-1deg);
+    
+    /* Bayangan tetap besar */
+    box-shadow: 20px 20px 0px rgba(0,0,0,0.2); 
+    
+    /* Border sedikit lebih gelap dari kertas */
+    border: 1px solid #d3c5a3;
+}
+
+/* DEKORASI SELOTIP BESAR */
+.tape-login {
+    position: absolute; top: -25px; left: 50%; transform: translateX(-50%);
+    width: 180px; height: 50px; 
+    background: rgba(255, 255, 255, 0.3); /* Transparan */
+    border-left: 2px dotted rgba(255,255,255,0.5);
+    border-right: 2px dotted rgba(255,255,255,0.5);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 10;
+    backdrop-filter: blur(3px);
+}
+
+/* DEKORASI STEMPEL 'TOP SECRET' */
+.stamp-secret {
+    position: absolute; top: 20px; right: 20px;
+    border: 4px double #c0392b; 
+    color: #c0392b;
+    padding: 5px 15px; 
+    font-family: 'Courier New', monospace; /* Font mesin tik */
+    font-weight: 900; 
+    font-size: 1.2rem;
+    transform: rotate(15deg);
+    opacity: 0.7;
+    mask-image: url('https://www.transparenttextures.com/patterns/grunge-wall.png'); /* Efek luntur */
+}
+
+.login-paper h1 { 
+    font-family: var(--font-title); 
+    font-size: 3.5rem; /* Judul SUPER BESAR */
+    color: #5d4037; 
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0px #eee;
+}
+
+.login-paper p {
+    font-family: var(--font-hand);
+    font-size: 1.3rem;
+    color: #555;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* INPUT STYLE: GAYA GARIS BAWAH */
+.login-input-group {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.login-paper input {
+    width: 80%; 
+    padding: 10px; 
+    border: none;
+    border-bottom: 4px solid #5d4037; /* Garis tebal di bawah */
+    background: transparent;
+    
+    text-align: center; 
+    font-family: var(--font-title); 
+    font-size: 2rem; /* Teks password besar */
+    outline: none; 
+    letter-spacing: 5px;
+    color: #5d4037;
+    transition: 0.3s;
+}
+
+.login-paper input:focus {
+    border-bottom-color: #5d4037; /* Berubah warna saat diketik */
+    transform: scale(1.05);
+}
+
+/* BUTTON STYLE: SEPERTI STIKER */
+.login-paper button {
+    background: #5d4037; 
+    color: white; 
+    border: 4px solid #826a6a; /* Border putih */
+    padding: 15px 40px; 
+    border-radius: 50px;
+    
+    font-family: var(--font-body); 
+    font-weight: 900; 
+    font-size: 1.2rem; 
+    cursor: pointer; 
+    
+    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.4);
+    transition: all 0.2s;
+}
+
+.login-paper button:hover { 
+    background: #5d4037; 
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(211, 84, 0, 0.6);
+}
+
+.login-paper button:active {
+    transform: translateY(2px);
+}
+
+/* Pesan Error */
+#error-msg {
+    color: #c0392b; margin-top: 15px; font-weight: bold; font-family: var(--font-hand);
+}
+
+/* --- NAVBAR (Responsive) --- */
+.navbar {
+    padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+    background: #fff; border-bottom: 3px solid #5d4037;
+    position: sticky; top: 0; z-index: 100; box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    flex-wrap: wrap; /* Agar bisa turun ke bawah di HP */
+    gap: 10px;
+}
+.nav-brand { 
+    font-family: var(--font-title); font-size: 1.8rem; transform: rotate(-1deg); color: #2c3e50; 
+}
+.nav-menu { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; } 
+/* --- NAVBAR BUTTONS (SKETCHY STYLE) --- */
+.nav-btn {
+    background: none; 
+    /* Border seperti coretan tangan */
+    border: 2px solid var(--ink-color);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; /* Bentuk lingkaran tidak sempurna */
+    
+    padding: 8px 16px;
+    cursor: pointer; 
+    font-family: var(--font-hand); /* Pakai font tulisan tangan */
+    font-weight: bold; 
+    transition: 0.3s; font-size: 1rem;
+    color: var(--ink-color);
+}
+
+.nav-btn:hover, .active-btn { 
+    background: var(--ink-color); 
+    color: #fff; 
+    transform: scale(1.05) rotate(-2deg); /* Miring dan membesar sedikit saat dihover */
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+.container { 
+    max-width: 1000px; 
+    margin: 30px auto;
+    padding: 40px; 
+    
+    /* Ubah background container jadi putih transparan (Frosted Glass) */
+    background-color: rgba(255,255,255,0.1); 
+    border-radius: 10px;
+    
+    /* Glow effect putih halus di pinggir */
+    box-shadow: 0 0 20px rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    
+    transform: rotate(-0.5deg);
+    backdrop-filter: blur(5px); 
+}
+/* --- TIMER --- */
+.timer-paper {
+    background: #fff8dc; padding: 10px 20px; display: block;
+    margin: 10px auto 30px auto; width: 90%; max-width: 400px; text-align: center;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2); position: relative;
+    border: 1px solid #ccc; transform: rotate(1deg);
+}
+.pin {
+    width: 15px; height: 15px; background: #ffffffbb; border-radius: 50%;
+    position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+#timer { font-family: var(--font-title); font-size: 1.4rem; color: #5d4037; }
+
+/* --- FORM --- */
+.form-paper {
+    background: #fff; padding: 30px 20px; max-width: 500px; margin: 0 auto;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2); position: relative;
+    background-image: repeating-linear-gradient(#fff 0px, #fff 29px, #d1f2eb 30px); 
+    line-height: 30px; border-radius: 4px; width: 100%;
+}
+.tape-corner {
+    position: absolute; top: -10px; right: -10px; width: 80px; height: 30px;
+    background: var(--tape-color); transform: rotate(45deg);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+label { font-weight: 800; background: #fff; padding-right: 5px; font-size: 0.9rem; color: #555; }
+input, select, textarea {
+    width: 100%; background: transparent; border: none; border-bottom: 2px solid #888;
+    font-family: var(--font-body); font-weight: 600; font-size: 1rem; margin-bottom: 20px; outline: none; color: #000;
+}
+.btn-scrap {
+    width: 100%; background: #27ae60; color: white; padding: 12px; border: none;
+    font-family: var(--font-body); font-weight: 800; cursor: pointer; margin-top: 10px;
+    box-shadow: 0 4px 0 #1e8449; border-radius: 8px;
+}
+
+.plans-container {
+    display: flex; flex-wrap: wrap; gap: 60px; justify-content: center; padding: 40px 10px;
+}
+
+.paper-list {
+    position: relative;
+    width: 100%; max-width: 400px;
+    min-height: 480px; /* Sedikit lebih tinggi biar lega */
+    padding: 30px;
+    box-shadow: 10px 15px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+}
+
+.paper-list:hover {
+    transform: scale(1.02) rotate(0deg) !important; z-index: 10;
+}
+
+/* --- GAYA 1: TRAVEL JOURNAL (NEW: VINTAGE MAP STYLE) --- */
+.travel-card {
+    background-color: #fdf6e3; /* Warna Cream Kertas Tua */
+    transform: rotate(-2deg);
+    
+    /* Motif Grid Peta Halus */
+    background-image: 
+        linear-gradient(#dcdcdc 1px, transparent 1px),
+        linear-gradient(90deg, #dcdcdc 1px, transparent 1px);
+    background-size: 30px 30px;
+    
+    /* Frame Foto Putih Tebal */
+    border: 12px solid #fff; 
+    outline: 1px solid #ccc; /* Garis halus di luar border putih */
+}
+
+/* Hiasan Washi Tape Hijau di Pojok */
+.tape-top-left {
+    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+    width: 130px; height: 35px; 
+    background: rgba(139, 157, 119, 0.85); /* Sage Green Aesthetic */
+    transform: rotate(-1deg); 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 5;
+    border-left: 2px dotted rgba(255,255,255,0.5);
+    border-right: 2px dotted rgba(255,255,255,0.5);
+}
+
+.travel-card h3 {
+    font-family: var(--font-title);
+    font-size: 2.2rem; margin-bottom: 30px; text-align: center;
+    color: #5d4037; /* Coklat Tua */
+    position: relative; z-index: 6;
+    margin-top: 10px; /* Turun sedikit biar pas di bawah selotip */
+    text-shadow: none;
+}
+
+/* Stempel "Wanderlust" di pojok */
+.stamp-decor {
+    position: absolute; bottom: 20px; right: 20px;
+    width: 60px; height: 60px;
+    border: 3px double #a1887f; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #a1887f; font-weight: bold; font-family: monospace; font-size: 0.7rem;
+    transform: rotate(-20deg); opacity: 0.6;
+    text-align: center;
+}
+
+/* --- GAYA 2: BUCKET LIST (FIXED POSITION) --- */
+.bucket-card {
+    background-color: #fff;
+    transform: rotate(2deg);
+    
+    /* Garis Buku Tulis */
+    background-image: repeating-linear-gradient(#fff 0px, #fff 29px, #d1f2eb 30px);
+    line-height: 30px;
+    
+    /* HEADER HITAM DIPERBAIKI */
+    border-top: 80px solid #e89eb8; /* Hitam tebal di atas */
+    border-radius: 4px;
+}
+
+.bucket-card h3 {
+    font-family: var(--font-title);
+    font-size: 2.2rem;
+    color: #fff;
+    text-align: center;
+
+    /* POSISI TEKS DIPERBAIKI (Diturunkan agar tidak ketutup selotip) */
+    position: absolute;
+    top: -50px; /* UBAH INI: Dulu -65px, sekarang diturunkan */
+    left: 0;
+    width: 100%;
+
+    z-index: 10;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+}
+
+/* --- SELOTIP TENGAH ATAS (NAIK LAGI) --- */
+.tape-bucket-center {
+    position: absolute;
+    
+    /* UBAH INI: Naikkan lagi jadi -110px */
+    top: -110px; 
+    
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+
+    width: 150px;
+    height: 45px;
+
+    /* Warna Tan/Coklat Muda Transparan */
+    background: rgba(215, 195, 160, 0.85);
+
+    /* Efek Sobekan */
+    border-left: 2px dotted rgba(0,0,0,0.2);
+    border-right: 2px dotted rgba(0,0,0,0.2);
+
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    z-index: 100;
+    backdrop-filter: blur(2px);
+}
+
+.doodle-star {
+    position: absolute; bottom: 15px; right: 15px;
+    font-size: 2.5rem; color: #f1c40f; transform: rotate(15deg);
+    text-shadow: 1px 1px 0px #000;
+}
+
+/* --- INPUT & BUTTON STYLING (Dipercantik) --- */
+.input-row-plan {
+    display: flex; gap: 0; margin-bottom: 25px;
+    border: 2px solid #5d4037; border-radius: 8px; overflow: hidden;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+    background: #fff;
+}
+
+.input-row-plan input {
+    flex: 1; border: none; padding: 12px; font-size: 1rem;
+    font-family: var(--font-body); background: transparent; margin: 0; outline: none;
+    color: #333;
+}
+
+.input-row-plan button {
+    background: #5d4037; color: #fff; border: none; padding: 0 20px;
+    font-weight: bold; cursor: pointer; font-family: var(--font-title);
+    font-size: 1.2rem; transition: 0.2s;
+    border-left: 2px solid #5d4037;
+}
+.input-row-plan button:hover { background: #8d6e63; }
+
+/* --- LIST ITEMS (STICKER STYLE) --- */
+.scrap-list { list-style: none; padding: 0; }
+
+.scrap-list li {
+    background: #fff;
+    padding: 10px 15px; margin-bottom: 15px;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+    font-family: var(--font-hand); font-size: 1.3rem; font-weight: bold;
+    display: flex; justify-content: space-between; align-items: center;
+    transform: rotate(-1deg); /* Default miring dikit */
+    transition: 0.2s;
+    border: 1px solid #ddd;
+}
+
+.scrap-list li:nth-child(even) { transform: rotate(1deg); background: #f9f9f9; }
+.scrap-list li:hover { transform: scale(1.02); z-index: 5; }
+
+/* Tombol Hapus X */
+.btn-del-list {
+    background: #e74c3c; color: white; width: 25px; height: 25px;
+    border-radius: 50%; border: none; font-size: 0.8rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.btn-del-list:hover { background: #c0392b; }
+
+
+
+/* --- GALLERY WALL (Responsive & No Crop) --- */
+.controls-area { 
+    display: flex; gap: 10px; justify-content: center; margin: 20px 0; flex-wrap: wrap; 
+}
+.controls-area input, .controls-area select {
+    width: auto; background: #fff; border: 2px solid #555; padding: 8px 12px;
+    border-radius: 10px; font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; margin: 0;
+}
+
+.scrapbook-wall {
+    display: grid; 
+    /* Grid otomatis: Di HP 1 kolom, di Laptop 2-3 kolom */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 50px; padding: 10px;
+}
+
+/* CONTAINER ITEM (Fleksibel) */
+.memory-cluster {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Tengah secara horizontal */
+    margin-bottom: 20px;
+    /* Hilangkan fixed height agar bisa melar */
+}
+
+/* KERTAS 1: FOTO (Bisa Panjang/Pendek) */
+.paper-photo {
+    background: #fff; 
+    padding: 10px 10px 45px 10px; /* Padding bawah lebih besar untuk gaya polaroid */
+    box-shadow: 3px 3px 12px rgba(0,0,0,0.2); 
+    width: 100%; 
+    max-width: 320px; /* Batas lebar agar tidak terlalu raksasa */
+    transform: rotate(-2deg);
+    position: relative; 
+    z-index: 2; 
+    transition: 0.3s;
+}
+
+.paper-photo img {
+    width: 100%; 
+    height: auto; /* KUNCI NO CROP: Tinggi mengikuti gambar */
+    display: block;
+    filter: sepia(10%) contrast(100%); 
+    border: 1px solid #eee;
+}
+
+.paper-photo::before { /* Selotip */
+    content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    width: 70px; height: 25px;
+    background: rgba(255,255,255,0.6); box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* KERTAS 2: JUDUL (Menempel di Foto) */
+.paper-title {
+    position: absolute; top: -15px; right: 0px;
+    background: #e67e22; color: #fff; padding: 5px 12px;
+    font-family: var(--font-hand); font-weight: bold; font-size: 1rem;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3); z-index: 3; transform: rotate(3deg);
+    border-left: 2px dashed rgba(255,255,255,0.4); border-radius: 2px;
+    max-width: 80%; /* Biar gak keluar layar di HP */
+    word-wrap: break-word;
+}
+
+/* KERTAS 3: DESKRIPSI (Menumpuk di bawah foto) */
+.paper-note {
+    width: 90%; 
+    max-width: 300px;
+    background: #fff; 
+    background-image: repeating-linear-gradient(#fff 0px, #fff 24px, #ccc 25px);
+    padding: 20px; 
+    font-family: var(--font-body); font-size: 0.95rem; line-height: 25px; font-weight: 600;
+    color: #444; 
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.15); 
+    border-radius: 2px;
+    
+    /* Posisi Relative dengan Margin Negatif agar menumpuk tapi tetap responsive */
+    position: relative; 
+    margin-top: -30px; /* Menarik ke atas supaya tertindih foto */
+    z-index: 1; 
+    transform: rotate(2deg);
+}
+
+.btn-remove {
+    position: absolute; top: -10px; left: -10px;
+    background: #c0392b; color: #fff; border: none; width: 30px; height: 30px;
+    border-radius: 50%; font-weight: bold; cursor: pointer; z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Efek Hover */
+.memory-cluster:hover .paper-photo { transform: scale(1.01) rotate(0deg); z-index: 5;}
+.memory-cluster:hover .paper-note { transform: scale(1.02) rotate(0deg); z-index: 6; margin-top: -10px; }
+
+/* --- SLIDER VINTAGE (VERSI BESAR / BIG SIZE) --- */
+.vintage-slider {
+    background: #2c3e50; 
+    padding: 15px; /* Padding sedikit diperbesar */
+    margin-bottom: 40px;
+    border: 6px solid #fff; /* Border lebih tebal biar gagah */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Bayangan lebih dramatis */
+    
+    position: relative; 
+    transform: rotate(-1deg); 
+    
+    width: 100%; 
+    max-width: 900px; /* LEBAR DIPERBESAR (Dulu 600px) */
+    margin: 0 auto 50px auto;
+}
+
+.slider-tape {
+    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+    width: 150px; height: 40px; /* Selotip diperbesar dikit */
+    background: rgba(255,255,255,0.4); 
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.slider-track { 
+    height: 500px; /* TINGGI DIPERBESAR (Dulu 250px) */
+    position: relative; 
+    overflow: hidden; 
+    border: 1px solid #000;
+}
+
+.slide { 
+    position: absolute; top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    opacity: 0; 
+    transition: opacity 1s ease-in-out; 
+    z-index: 1;
+}
+
+.slide.active { opacity: 1; z-index: 2; }
+
+.slide img { 
+    width: 100%; height: 100%; 
+    object-fit: cover; /* Tetap cover agar rapi di dalam kotak */
+    object-position: center;
+    opacity: 0.95; 
+}
+
+.slide-caption {
+    position: absolute; bottom: 30px; left: 30px; color: #fff;
+    background: rgba(0,0,0,0.7); padding: 10px 25px; 
+    font-family: var(--font-title); font-size: 2rem; /* Font judul lebih besar */
+    border-radius: 4px;
+    z-index: 3;
+    text-shadow: 2px 2px 4px #000;
+    max-width: 80%;
+}
+
+
+
+/* --- MOBILE RESPONSIVE TWEAKS --- */
+@media (max-width: 600px) {
+    .navbar { flex-direction: column; gap: 10px; padding: 10px; }
+    .nav-brand { margin-bottom: 5px; }
+    
+    .scrapbook-wall { 
+        grid-template-columns: 1fr; /* 1 Kolom penuh di HP */
+        gap: 60px; /* Jarak antar item lebih jauh agar tidak dempet */
+    }
+    
+    .paper-photo { width: 95%; transform: rotate(-1deg); }
+    .paper-note { width: 90%; transform: rotate(1deg); }
+    
+    .controls-area { flex-direction: column; align-items: center; }
+    .controls-area input, .controls-area select { width: 90%; }
+    
+    .vintage-slider {
+        padding: 10px;
+        border-width: 4px;
+        max-width: 95%; /* Di HP hampir full layar */
+    }
+    
+    .slider-track {
+        height: 300px; /* Di HP jangan 500px nanti menu bawah ketutup */
+    }
+
+    .slide-caption {
+        font-size: 1.2rem;
+        bottom: 15px; left: 15px; padding: 5px 15px;
+    }
+}
+
+/* --- STYLE TAMBAHAN UNTUK CLICKABLE TAG --- */
+.clickable-tag {
+    font-size: 0.8rem;
+    color: #888;
+    display: block;
+    margin-top: 10px;
+    cursor: pointer; /* Menunjukkan bisa diklik */
+    transition: 0.3s;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+.clickable-tag:hover {
+    color: #d35400; /* Berubah warna oranye saat di-hover */
+    background-color: #f0f0f0;
+    text-decoration: underline;
+}
+
+/* --- BACKGROUND DECORATIONS (AESTHETIC DOODLES) --- */
+#background-decor {
+    position: fixed; /* Agar tetap diam saat discroll */
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; /* Agar tidak menghalangi klik tombol */
+    z-index: 0; /* Di belakang konten utama */
+    overflow: hidden;
+}
+
+.scrap-doodle {
+    position: absolute;
+    opacity: 0.15; /* Transparan biar ga ganggu teks (Watermark style) */
+    filter: sepia(100%) hue-rotate(320deg) saturate(50%); /* Warna Tinta Coklat/Merah Pudar */
+    animation: floaty 10s infinite ease-in-out;
+}
+
+/* Animasi halus biar seolah 'hidup' */
+@keyframes floaty {
+    0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+    50% { transform: translateY(-10px) rotate(var(--rot)); }
+}
+
+/* Kertas Sobek di Pojok Layar (Opsional: Bingkai Layar) */
+body::before, body::after {
+    content: ''; position: fixed; width: 150px; height: 150px; z-index: 900;
+    background-size: contain; background-repeat: no-repeat; pointer-events: none; opacity: 0.8;
+}
+/* --- HAPUS SEMUA DEKORASI PINGGIR (CLEAN LOOK) --- */
+body::before, body::after {
+    display: none !important;
+    content: none;
+}
+
+.sparkle {
+    position: fixed;
+    top: 0; left: 0;
+    width: 4px; height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 10px #fff, 0 0 20px #f1c40f; /* Glow efek */
+    animation: fadeOut 1s forwards;
+    z-index: 9999;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0) translate(10px, 10px); }
+}
+
+/* --- VINYL PLAYER WIDGET (RESPONSIVE & RAPI) --- */
+.vinyl-player {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak antar elemen flex */
+    
+    background: rgba(25, 25, 25, 0.95); /* Lebih pekat dikit */
+    
+    /* Padding kiri dikurangi karena disk sudah menonjol, 
+       tapi kita akan atur jarak teks lewat .player-info */
+    padding: 15px 25px 15px 40px; 
+    
+    border-radius: 50px;
+    border: 2px solid #444;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    z-index: 1000;
+    transition: 0.3s;
+    width: 340px; /* Lebar sedikit ditambah */
+}
+
+/* Piringan Hitam */
+.vinyl-disk {
+    position: absolute;
+    left: -15px; /* Keluar sedikit lebih banyak biar keren */
+    width: 85px;
+    height: 85px;
+    background: #111;
+    border-radius: 50%;
+    border: 3px solid #333;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+    display: flex; justify-content: center; align-items: center;
+    
+    /* Animasi Putar */
+    animation: spinDisk 4s linear infinite;
+    animation-play-state: paused;
+    z-index: 2;
+}
+
+/* Label Tengah Piringan */
+.vinyl-label {
+    width: 30px; height: 30px;
+    background: #e74c3c; 
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 12px; color: white; border: 2px solid #fff;
+}
+
+.vinyl-grooves {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%;
+    background: repeating-radial-gradient(#111 0, #111 4px, #222 5px, #111 6px);
+    opacity: 0.8;
+}
+
+/* Info Lagu (Teks) */
+.player-info {
+    flex: 1; /* Mengisi sisa ruang */
+    display: flex; flex-direction: column; justify-content: center;
+    
+    /* UBAH INI: Geser teks lebih ke kanan agar tidak ketabrak piringan */
+    padding-left: 35px; 
+    overflow: hidden; /* Mencegah teks keluar kotak */
+}
+
+.now-playing-label {
+    font-family: monospace; font-size: 0.65rem; color: #f1c40f; letter-spacing: 2px;
+    margin-bottom: 4px; text-transform: uppercase;
+}
+
+.song-title-wrapper {
+    width: 100%;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; /* Titik-titik jika kepanjangan */
+    margin-bottom: 8px;
+}
+
+#song-title {
+    font-family: var(--font-body); font-weight: bold; color: #fff; font-size: 0.95rem;
+}
+
+/* Kontrol Tombol */
+.player-controls { display: flex; gap: 15px; align-items: center; }
+
+.player-controls button {
+    background: none; border: none; color: #bbb; cursor: pointer; font-size: 1.2rem; transition: 0.2s; padding: 0;
+}
+.player-controls button:hover { color: #fff; transform: scale(1.1); }
+#play-btn { color: #fff; font-size: 1.5rem; }
+
+@keyframes spinDisk { 100% { transform: rotate(360deg); } }
+
+/* --- RESPONSIVE UNTUK HP (MOBILE) --- */
+@media (max-width: 500px) {
+    .vinyl-player {
+        /* Posisi di tengah bawah layar HP */
+        bottom: 20px; 
+        left: 50%; 
+        transform: translateX(-50%);
+        
+        /* Ukuran disesuaikan dengan lebar layar HP */
+        width: 90%; 
+        max-width: 350px;
+        
+        /* Padding disesuaikan */
+        padding: 12px 20px 12px 30px;
+    }
+    
+    .vinyl-disk {
+        width: 70px; height: 70px; /* Piringan mengecil sedikit */
+        left: -10px;
+    }
+    
+    .player-info {
+        padding-left: 45px; /* Geser teks lebih jauh lagi di HP karena piringan relatif besar */
+    }
+    
+    #song-title { font-size: 0.9rem; }
+    .now-playing-label { font-size: 0.6rem; }
+}
+
+/* --- UPDATE: HIDE FEATURE --- */
+
+.vinyl-player {
+    /* Pastikan transisi halus saat geser */
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.27); 
+    
+    /* Posisi awal (Terbuka) */
+    transform: translateX(0);
+}
+
+/* STATE: Sembunyi (Digeser ke kiri layar) */
+.vinyl-player.hide-widget {
+    /* Geser ke kiri sejauh lebar widget + sedikit margin biar sembunyi total */
+    transform: translateX(calc(-100% - 40px)); 
+}
+
+/* TOMBOL TOGGLE (Tab Kecil di Kanan Widget) */
+.toggle-player-btn {
+    position: absolute;
+    top: 50%;
+    right: -40px; /* Menempel di luar kotak sebelah kanan */
+    transform: translateY(-50%);
+    
+    width: 40px;
+    height: 40px;
+    background: #e74c3c; /* Merah menyala */
+    color: white;
+    border: 2px solid #fff;
+    
+    /* Bentuk Tab Setengah Lingkaran/Kotak */
+    border-radius: 0 10px 10px 0; 
+    box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+    
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1001;
+    outline: none;
+}
+
+.toggle-player-btn:hover {
+    background: #c0392b;
+}
+
+/* Ganti ikon tombol saat sembunyi (lewat CSS/JS logic nanti) */
+.vinyl-player.hide-widget .toggle-player-btn {
+    background: #f1c40f; /* Ganti warna jadi kuning saat sembunyi */
+    color: #333;
+}
+
+.scrap-list li span {
+    cursor: pointer;
+    flex: 1; /* Supaya area klik luas */
+    transition: 0.3s;
+}
+
+.scrap-list li span:hover {
+    color: #d35400; /* Efek hover sedikit */
+}
+
+/* Kalau sudah selesai (Class 'completed') */
+.scrap-list li.completed span {
+    text-decoration: line-through; /* Coret tengah */
+    color: #888; /* Warna jadi abu-abu */
+    font-style: italic;
+}
+
+/* Tambahkan tanda centang otomatis di depan teks */
+.scrap-list li.completed span::before {
+    content: '✔ ';
+    color: #27ae60;
+    font-weight: bold;
+}
