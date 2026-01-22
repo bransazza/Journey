@@ -836,102 +836,87 @@ body::before, body::after {
     .controls-area { flex-direction: column; align-items: center; }
     .controls-area input, .controls-area select { width: 90%; }
     
-    /* --- 1. PERBAIKAN HALAMAN LOGIN (AGAR LEBIH LEBAR) --- */
-    .login-paper {
-        width: 90%; /* Menggunakan 90% lebar layar */
-        max-width: none; /* Hapus batasan max-width desktop */
-        padding: 40px 25px; /* Padding disesuaikan */
-        margin-top: 10vh; /* Turun sedikit dari atas */
+    /* --- 1. LOGIN PAGE (DORONG KE ATAS) --- */
+    .login-overlay {
+        /* Ubah posisi dari tengah (center) ke atas (flex-start) */
+        align-items: flex-start !important; 
+        padding-top: 10vh !important; /* Beri jarak 10% dari atas layar */
+        overflow-y: auto !important; /* Agar bisa discroll jika HP sangat pendek */
     }
 
-    .login-paper h1 {
-        font-size: 2.5rem; /* Judul sedikit lebih kecil */
+    .login-paper {
+        width: 85% !important;
+        max-width: none !important;
+        padding: 30px 20px !important;
+        
+        /* Hapus margin-top besar, ganti dengan margin bottom agar tidak nempel player */
+        margin-top: 0 !important; 
+        margin-bottom: 120px !important; /* Ruang kosong di bawah untuk Music Player */
     }
     
-    /* Input field agar garisnya penuh */
-    .login-input-group {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .login-paper input {
-        width: 100%; /* Input mengambil lebar penuh kertas */
-        font-size: 1.5rem;
-    }
-
-    .tape-login {
-        width: 130px;
-        top: -20px;
-    }
+    .login-input-group { width: 100% !important; }
+    .login-paper input { width: 100% !important; font-size: 1.5rem !important; }
+    .tape-login { width: 120px !important; top: -20px !important; }
 
 
-    /* --- 2. PERBAIKAN MUSIC PLAYER (TATA LETAK ULANG TOTAL) --- */
+    /* --- 2. MUSIC PLAYER (TETAP DI BAWAH & RAPI) --- */
     .vinyl-player {
-        /* Posisi Tengah Bawah */
-        left: 50%;
-        bottom: 20px;
-        transform: translateX(-50%); /* Wajib untuk centering */
+        position: fixed !important;
+        left: 50% !important;
+        bottom: 20px !important; /* Menempel di bawah */
+        transform: translateX(-50%) !important;
         
-        /* UBAH JADI FLEXBOX SEJAJAR */
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 15px; /* Jarak antara piringan dan teks */
-
-        /* Ukuran Widget */
-        width: auto; /* Lebar otomatis mengikuti isi */
-        min-width: 300px; /* Tapi jangan terlalu kecil */
-        max-width: 85%; /* Dan jangan melebihi 85% layar */
+        /* Flexbox Sejajar (Disk Kiri, Teks Kanan) */
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
         
-        /* Padding dirapatkan */
-        padding: 12px 15px;
+        /* Ukuran & Jarak */
+        width: 90% !important;
+        max-width: 340px !important;
+        padding: 10px 15px !important;
+        gap: 15px !important;
         
-        /* Margin kanan agar tombol X tidak kepotong layar */
-        margin-right: 25px; 
+        z-index: 9999 !important; /* Pastikan selalu paling atas */
+        
+        /* Bayangan dipertebal agar terlihat memisah dari kertas jika masih nempel dikit */
+        box-shadow: 0 5px 20px rgba(0,0,0,0.8) !important;
     }
 
-    /* PIRINGAN HITAM (RESET POSISI JADI NORMAL) */
+    /* PIRINGAN HITAM */
     .vinyl-disk {
-        position: relative; /* TIDAK LAGI ABSOLUTE (MELAYANG) */
-        left: auto;
-        top: auto;
-        margin: 0;
-        
-        /* Ukuran diperkecil untuk HP */
-        width: 60px;
-        height: 60px;
-        flex-shrink: 0; /* Agar bentuknya tetap bulat gak gepeng */
-        border-width: 2px;
+        position: static !important; /* Tidak melayang */
+        margin: 0 !important;
+        width: 55px !important;
+        height: 55px !important;
+        flex-shrink: 0 !important;
+        border: 2px solid #333 !important;
     }
 
-    /* INFO LAGU (RESET PADDING) */
+    /* INFO LAGU */
     .player-info {
-        /* HAPUS padding kiri besar yang dulu dibuat untuk piringan absolute */
-        padding-left: 0; 
-        flex-grow: 1; /* Mengisi sisa ruang yang ada */
-        width: auto; /* Reset lebar */
-        overflow: hidden;
+        padding-left: 0 !important;
+        width: 100% !important;
+        text-align: left !important;
     }
 
-    /* Perkecil Teks agar muat */
-    .now-playing-label { font-size: 0.5rem; margin-bottom: 2px; }
-    #song-title { font-size: 0.85rem; }
-    .song-title-wrapper { margin-bottom: 5px; }
-    .player-controls button { font-size: 1.2rem; }
-
+    .now-playing-label { font-size: 0.5rem !important; }
+    #song-title { font-size: 0.85rem !important; }
+    .player-controls button { font-size: 1.2rem !important; }
 
     /* TOMBOL TOGGLE (X) */
     .toggle-player-btn {
-        width: 35px;
-        height: 35px;
-        right: -35px; /* Tempel persis di sisi kanan widget */
-        font-size: 0.9rem;
+        position: absolute !important;
+        right: -5px !important; /* Tempel di pojok kanan atas widget */
+        top: -15px !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.9rem !important;
     }
 
-    /* --- LOGIKA HIDE DI HP (GESER KE BAWAH) --- */
-    /* Penting: Gunakan !important agar menimpa style desktop */
+    /* HIDE LOGIC */
     .vinyl-player.hide-widget {
-        transform: translate(-50%, 150%) !important; 
+        transform: translate(-50%, 150%) !important;
     }
 }
