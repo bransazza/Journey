@@ -907,7 +907,7 @@ body::before, body::after {
 
     /* TOMBOL TOGGLE (X) */
     .toggle-player-btn {
-        position: absolute !important;
+        position: absolute !important;  
         right: -5px !important; /* Tempel di pojok kanan atas widget */
         top: -15px !important;
         width: 32px !important;
